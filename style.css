@@ -1,0 +1,279 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --background: hsl(40, 30%, 97%);
+  --foreground: hsl(30, 10%, 15%);
+  --card: hsl(40, 40%, 99%);
+  --primary: hsl(24, 80%, 55%);
+  --primary-foreground: hsl(40, 30%, 99%);
+  --muted: hsl(40, 15%, 90%);
+  --muted-foreground: hsl(30, 8%, 50%);
+  --accent: hsl(150, 40%, 45%);
+  --accent-foreground: hsl(40, 30%, 99%);
+  --destructive: hsl(0, 65%, 55%);
+  --border: hsl(35, 20%, 88%);
+  --shadow-soft: 0 2px 8px -2px hsla(30, 20%, 20%, 0.08);
+  --shadow-card: 0 4px 20px -4px hsla(30, 20%, 20%, 0.12);
+  --radius: 0.75rem;
+}
+
+body {
+  font-family: 'Source Sans 3', sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
+  min-height: 100vh;
+  padding: 2rem 1rem;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+}
+
+.container {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.icon-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 1rem;
+  background-color: hsla(24, 80%, 55%, 0.1);
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: var(--muted-foreground);
+}
+
+.input-form {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+#todoInput {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-family: inherit;
+  background-color: var(--card);
+  box-shadow: var(--shadow-soft);
+  transition: all 0.2s ease;
+}
+
+#todoInput:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px hsla(24, 80%, 55%, 0.2);
+}
+
+#todoInput::placeholder {
+  color: var(--muted-foreground);
+  opacity: 0.6;
+}
+
+.add-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.add-btn:hover {
+  box-shadow: var(--shadow-card);
+  transform: scale(1.02);
+}
+
+.add-btn:active {
+  transform: scale(0.98);
+}
+
+.add-btn span {
+  display: none;
+}
+
+@media (min-width: 480px) {
+  .add-btn span {
+    display: inline;
+  }
+}
+
+.stats {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+
+.stats:empty {
+  display: none;
+}
+
+.todo-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background-color: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  transition: all 0.2s ease;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.todo-item:hover {
+  box-shadow: var(--shadow-card);
+}
+
+.todo-item.completed {
+  opacity: 0.7;
+}
+
+.check-btn {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--muted-foreground);
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  opacity: 0.4;
+}
+
+.check-btn:hover {
+  border-color: var(--primary);
+  opacity: 1;
+}
+
+.todo-item.completed .check-btn {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  opacity: 1;
+}
+
+.check-btn svg {
+  display: none;
+  color: var(--accent-foreground);
+}
+
+.todo-item.completed .check-btn svg {
+  display: block;
+  animation: checkBounce 0.3s ease-out;
+}
+
+@keyframes checkBounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.todo-text {
+  flex: 1;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.todo-item.completed .todo-text {
+  text-decoration: line-through;
+  color: var(--muted-foreground);
+}
+
+.delete-btn {
+  flex-shrink: 0;
+  padding: 0.5rem;
+  background: transparent;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  color: var(--muted-foreground);
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+.todo-item:hover .delete-btn {
+  opacity: 0.5;
+}
+
+.delete-btn:hover {
+  opacity: 1 !important;
+  color: var(--destructive);
+  background-color: hsla(0, 65%, 55%, 0.1);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 0;
+  color: var(--muted-foreground);
+}
+
+.empty-state p:first-child {
+  font-size: 1.125rem;
+  margin-bottom: 0.25rem;
+}
+
+.empty-state p:last-child {
+  font-size: 0.875rem;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 3rem;
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+  opacity: 0.6;
+}
