@@ -3,34 +3,121 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Tasks - To-Do List</title>
+  <title>TaskFlow - Smart To-Do</title>
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <main class="container">
-    <header class="header">
-      <div class="icon-wrapper">
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="6" height="6" rx="1"/><path d="m3 17 2 2 4-4"/><path d="M13 6h8"/><path d="M13 12h8"/><path d="M13 18h8"/></svg>
+  <div class="app-wrapper">
+    <div class="background-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+    </div>
+    
+    <div class="container">
+      <header>
+        <div class="header-content">
+          <div class="logo">
+            <div class="logo-icon">✦</div>
+            <div>
+              <h1>TaskFlow</h1>
+              <p class="tagline">Organize your day beautifully</p>
+            </div>
+          </div>
+          <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+            <span class="toggle-track">
+              <span class="toggle-thumb"></span>
+            </span>
+            <span class="sun-icon">☀️</span>
+            <span class="moon-icon">🌙</span>
+          </button>
+        </div>
+      </header>
+
+      <div class="search-container">
+        <div class="search-icon">🔍</div>
+        <input type="text" id="searchInput" placeholder="Search your tasks...">
       </div>
-      <h1>My Tasks</h1>
-      <p class="subtitle">Stay organized, get things done</p>
-    </header>
 
-    <form class="input-form" id="todoForm">
-      <input type="text" id="todoInput" placeholder="Add a new task..." required>
-      <button type="submit" class="add-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-        <span>Add</span>
-      </button>
-    </form>
+      <form id="todoForm" class="todo-form">
+        <div class="input-wrapper">
+          <input type="text" id="todoInput" placeholder="What's on your mind?" required>
+          <button type="submit" class="add-btn">
+            <span>+</span>
+          </button>
+        </div>
+        
+        <div class="form-options">
+          <div class="option-group">
+            <label>📅</label>
+            <input type="date" id="dueDate">
+          </div>
+          
+          <div class="option-group">
+            <label>📁</label>
+            <select id="category">
+              <option value="">Category</option>
+              <option value="work">Work</option>
+              <option value="personal">Personal</option>
+              <option value="shopping">Shopping</option>
+              <option value="health">Health</option>
+            </select>
+          </div>
+          
+          <div class="option-group priority-options">
+            <button type="button" class="priority-btn low active" data-priority="low" title="Low">
+              <span class="priority-dot"></span>
+            </button>
+            <button type="button" class="priority-btn medium" data-priority="medium" title="Medium">
+              <span class="priority-dot"></span>
+            </button>
+            <button type="button" class="priority-btn high" data-priority="high" title="High">
+              <span class="priority-dot"></span>
+            </button>
+          </div>
+        </div>
+      </form>
 
-    <div class="stats" id="stats"></div>
+      <div class="filters-wrapper">
+        <div class="status-tabs">
+          <button class="tab-btn active" data-status="all">
+            All <span class="tab-count" id="allCount">0</span>
+          </button>
+          <button class="tab-btn" data-status="active">
+            Active <span class="tab-count" id="activeCount">0</span>
+          </button>
+          <button class="tab-btn" data-status="completed">
+            Done <span class="tab-count" id="completedCount">0</span>
+          </button>
+        </div>
+        
+        <div class="category-chips">
+          <button class="chip active" data-filter="all">All</button>
+          <button class="chip" data-filter="work">💼 Work</button>
+          <button class="chip" data-filter="personal">🏠 Personal</button>
+          <button class="chip" data-filter="shopping">🛒 Shopping</button>
+          <button class="chip" data-filter="health">💪 Health</button>
+        </div>
+      </div>
 
-    <ul class="todo-list" id="todoList"></ul>
+      <div class="progress-section">
+        <div class="progress-info">
+          <span id="progressText">0 of 0 completed</span>
+          <span id="progressPercent">0%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
 
-    <footer class="footer">Tasks are saved locally in your browser</footer>
-  </main>
+      <ul id="todoList" class="todo-list"></ul>
+
+      <footer>
+        <p>✨ Your tasks are saved automatically</p>
+      </footer>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
